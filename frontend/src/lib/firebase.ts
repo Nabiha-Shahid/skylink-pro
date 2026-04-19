@@ -10,15 +10,17 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase - only once
-let app: FirebaseApp;
+// Initialize Firebase only if the API key is present (guards against build-time SSR crashes)
+let app: FirebaseApp | undefined;
+let auth: Auth | undefined;
 
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApps()[0];
+if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = getApps()[0];
+  }
+  auth = getAuth(app);
 }
-
-const auth: Auth = getAuth(app);
 
 export { app, auth };
