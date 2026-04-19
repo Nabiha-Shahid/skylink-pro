@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+aioredis
+pydantic
+pydantic-settings
+python-dotenv
+stripe
+firebase-admin
+python-multipart
+httpx
+pytest
+redis
+duffel-api
